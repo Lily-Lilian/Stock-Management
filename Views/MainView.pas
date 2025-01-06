@@ -198,6 +198,54 @@ begin
       end;
     end
 
+     // Handle Get All Items
+    else if (ARequestInfo.Command = 'GET') and (ARequestInfo.Document = '/api/items') then
+    begin
+      JsonArray := StockController.GetAllItems;
+      try
+        AResponseInfo.ContentType := 'application/json';
+        AResponseInfo.ContentText := JsonArray.ToJSON;
+        AResponseInfo.ResponseNo := 200; // HTTP 200 OK
+      finally
+        JsonArray.Free;
+      end;
+    end
+
+     // Handle sell Items
+    else if (ARequestInfo.Command = 'POST') and (ARequestInfo.Document = '/api/sellItem') then
+    begin
+      RequestBody := TStringStream.Create;
+      try
+        ARequestInfo.PostStream.Position := 0;
+        RequestBody.CopyFrom(ARequestInfo.PostStream, ARequestInfo.PostStream.Size);
+        JsonRequest := TJSONObject.ParseJSONValue(RequestBody.DataString) as TJSONObject;
+        try
+          if Assigned(JsonRequest) then
+          begin
+            JsonResponse := StockController.SellItem(
+              JsonRequest.GetValue<string>('name'),
+              JsonRequest.GetValue<Integer>('quantity')
+            );
+
+            AResponseInfo.ContentType := 'application/json';
+            AResponseInfo.ContentText := JsonResponse.ToJSON;
+            AResponseInfo.ResponseNo := 200; // HTTP 200 OK
+          end
+          else
+          begin
+            AResponseInfo.ContentType := 'application/json';
+            AResponseInfo.ContentText := '{"status": "error", "message": "Invalid JSON"}';
+            AResponseInfo.ResponseNo := 400; // HTTP 400 Bad Request
+          end;
+        finally
+          JsonRequest.Free;
+          JsonResponse.Free;
+        end;
+      finally
+        RequestBody.Free;
+      end;
+    end
+
     // Handle Unknown Routes
     else
     begin

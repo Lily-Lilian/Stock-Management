@@ -166,6 +166,7 @@ begin
   end;
 end;
 
+
 function TStockController.GetLowStockAlerts: TJSONArray;
 var
   Query: TFDQuery;
