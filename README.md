@@ -1,70 +1,139 @@
-# Getting Started with Create React App
+# Stock Management System - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A comprehensive inventory management solution that enables admins and stock officers to efficiently manage stock levels, sales, and inventory alerts.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+### Admin Dashboard
+- Add new items to inventory
+- View complete stock listing
+- Monitor key metrics (sales, low stock alerts)
 
-### `npm start`
+### Stock Officer Dashboard
+- Process item sales
+- View inventory status
+- Track metrics and alerts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Security
+- Role-based authentication (Admin/Stock Officer)
+- Secure user registration
+- Protected dashboard access
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Smart Notifications
+- Automated low-stock alerts
+- Real-time inventory updates
 
-### `npm test`
+## 🛠️ Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **React** - UI Components
+- **Material-UI** - Styling Framework
+- **React Router** - Navigation
+- **Axios** - API Integration
+- **JavaScript** - Core Logic
 
-### `npm run build`
+## 📁 Project Structure
+make this read me well for read
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I'll help restructure the README to make it more readable and organized. Here's the improved version:
+src/
+├── components/
+│ ├── Auth/
+│ │ ├── LoginForm.js
+│ │ └── SignUp.js
+│ │
+│ ├── Dashboard/
+│ │ ├── AdminDashboard.js
+│ │ ├── OfficerDashboard.js
+│ │ └── Notifications.js
+│ │
+│ ├── Pages/
+│ │ ├── LoginPage.js
+│ │ └── SignupPage.js
+│ │
+│ ├── Shared/
+│ │ ├── Navbar.js
+│ │ ├── Sidebar.js
+│ │ └── Card.js
+│ │
+│ └── Stock/
+│ ├── AddItem.js
+│ ├── SellItem.js
+│ └── ViewItems.js
+│
+├── api/
+│ └── index.js
+│
+├── App.js
+└── index.js
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
+- Node.js & npm (or Yarn)
+- Running backend server
 
-### `npm run eject`
+### Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Clone the repository**
+   ```bash
+    git clone https://github.com/Lily-Lilian/Stock-Management.git
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Configure environment**
+   Create `.env` file:
+   ```env
+   REACT_APP_API_BASE_URL=http://localhost:5500/api
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. **Launch application**
+   ```bash
+   npm start
+   ```
 
-## Learn More
+   Access at: `http://localhost:3000`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📱 Usage Guide
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Authentication
+- **Login**: Access via `/login` with credentials
+- **Sign Up**: New users can register with role selection
 
-### Code Splitting
+### Admin Functions
+- Add new inventory items
+- Monitor stock levels
+- View sales metrics
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Stock Officer Functions
+- Process sales
+- Check inventory
+- Monitor alerts
 
-### Analyzing the Bundle Size
+## 🔌 API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/api/login` | POST | User authentication |
+| `/api/signup` | POST | New user registration |
+| `/api/add-item` | POST | Add inventory items |
+| `/api/sell-item` | POST | Process sales |
+| `/api/items` | GET | Fetch inventory |
+| `/api/total-sold` | GET | Sales metrics |
+| `/api/low-stock` | GET | Stock alerts |
 
-### Making a Progressive Web App
+## 💡 Best Practices
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Ensure backend connectivity before frontend launch
+2. Implement strong password policies
+3. Regular monitoring of stock alerts
 
-### Advanced Configuration
+## 🔮 Future Roadmap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ ] Additional user roles
+- [ ] Enhanced analytics
+- [ ] Multi-language support
+- [ ] UI/UX improvements
