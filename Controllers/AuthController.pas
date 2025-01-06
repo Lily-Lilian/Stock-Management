@@ -32,6 +32,7 @@ begin
   begin
     Result.AddPair('status', 'success');
     Result.AddPair('role', Role);
+    Result.AddPair('username', Username);
   end
   else
   begin
