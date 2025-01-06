@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Box, Typography } from "@mui/material";
+import { Grid, Box, Typography,Button } from "@mui/material";
 import Sidebar from "../Shared/Sidebar";
 import Navbar from "../Shared/Navbar";
 import MetricCard from "../Shared/Card";
+import { useNavigate } from "react-router-dom";
 import { getTotalItemsSold, getLowStockAlerts } from "../../api";
 
-const OfficerDashboard = ({ user, onLogout }) => {
+const AdminDashboard = ({ user, onLogout }) => {
   const [totalSold, setTotalSold] = useState(0);
   const [lowStockAlerts, setLowStockAlerts] = useState([]);
+  const navigate = useNavigate();
+  
 
-  const OfficerLinks = [
+  const officerLinks = [
     { label: "Dashboard", path: "/officer" },
-    { label: "Sell Item", path: "/officer/sell-item" },
-    { label: "View Stock", path: "/officer/view-item" },
   ];
-
+  
+ 
   const notifications = lowStockAlerts.map(
     (item) => `Low stock alert: ${item.name} has only ${item.quantity} left`
   );
@@ -33,7 +35,7 @@ const OfficerDashboard = ({ user, onLogout }) => {
   return (
     <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
       {/* Sidebar */}
-      <Sidebar links={OfficerLinks} onLogout={onLogout} />
+      <Sidebar links={officerLinks} onLogout={onLogout} />
 
       {/* Main Content */}
       <Box sx={{ flexGrow: 1, backgroundColor: "#F5F5F5" }}>
@@ -43,9 +45,10 @@ const OfficerDashboard = ({ user, onLogout }) => {
         {/* Dashboard Content */}
         <Box
           sx={{
-            padding: "24px",
+            height: "calc(100vh - 64px)",
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center",
             alignItems: "center",
           }}
         >
@@ -54,7 +57,7 @@ const OfficerDashboard = ({ user, onLogout }) => {
             variant="h5"
             sx={{
               fontWeight: "bold",
-              mb: 3,
+              mb: 4,
               textAlign: "center",
             }}
           >
@@ -62,7 +65,7 @@ const OfficerDashboard = ({ user, onLogout }) => {
           </Typography>
 
           {/* Metric Cards */}
-          <Grid container spacing={4} justifyContent="center">
+          <Grid container spacing={4} justifyContent="center" alignItems="center">
             {/* Total Items Sold */}
             <Grid item xs={12} sm={6} md={4}>
               <MetricCard
@@ -81,10 +84,37 @@ const OfficerDashboard = ({ user, onLogout }) => {
               />
             </Grid>
           </Grid>
+
+          {/* Action Buttons */}
+          <Box
+            sx={{
+              mt: 4,
+              display: "flex",
+              gap: 2,
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate("/officer/sell-item")}
+              sx={{ textTransform: "none", fontWeight: "bold" }}
+            >
+              sell Item
+            </Button>
+             <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => navigate("/officer/view-item")}
+                sx={{ textTransform: "none", fontWeight: "bold" }}
+              >
+              View Item
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default OfficerDashboard;
+export default AdminDashboard;

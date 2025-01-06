@@ -30,8 +30,8 @@ export const signup = (username, password, role) =>
 export const addItem = (name, quantity) =>
   handleRequest(() => apiClient.post("/addItem", { name, quantity }));
 
-export const sellItem = (item_name, quantity_to_sell) =>
-  handleRequest(() => apiClient.post("/sellItem", { item_name, quantity_to_sell }));
+export const sellItem = (name, quantity) =>
+  handleRequest(() => apiClient.post("/sellItem", { name, quantity }));
 
 export const getAllItems = () =>
   handleRequest(() => apiClient.get("/items"));

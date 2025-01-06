@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Typography,Button } from "@mui/material";
 import Sidebar from "../Shared/Sidebar";
 import Navbar from "../Shared/Navbar";
 import MetricCard from "../Shared/Card";
+import { useNavigate } from "react-router-dom";
 import { getTotalItemsSold, getLowStockAlerts } from "../../api";
 
 const AdminDashboard = ({ user, onLogout }) => {
   const [totalSold, setTotalSold] = useState(0);
   const [lowStockAlerts, setLowStockAlerts] = useState([]);
+  const navigate = useNavigate();
+  
 
   const adminLinks = [
     { label: "Dashboard", path: "/admin" },
-    { label: "Add Item", path: "/admin/add-item" },
-    { label: "View Stock", path: "/admin/view-item" },
   ];
-
+  
+ 
   const notifications = lowStockAlerts.map(
     (item) => `Low stock alert: ${item.name} has only ${item.quantity} left`
   );
@@ -31,21 +33,50 @@ const AdminDashboard = ({ user, onLogout }) => {
   }, []);
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
+      {/* Sidebar */}
       <Sidebar links={adminLinks} onLogout={onLogout} />
-      <Box sx={{ flexGrow: 1, backgroundColor: "#F5F5F5", minHeight: "100vh" }}>
+
+      {/* Main Content */}
+      <Box sx={{ flexGrow: 1, backgroundColor: "#F5F5F5" }}>
+        {/* Navbar */}
         <Navbar user={user} notifications={notifications} />
-        <Box sx={{ padding: "24px" }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Box sx={{ fontSize: "20px", fontWeight: "bold" }}>
-                Hey {user?.name || "User"} - here's what's happening today
-              </Box>
+
+        {/* Dashboard Content */}
+        <Box
+          sx={{
+            height: "calc(100vh - 64px)", // Adjust for Navbar height
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {/* Welcome Message */}
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: "bold",
+              mb: 4,
+              textAlign: "center",
+            }}
+          >
+            Hey {user?.username || "User"} - here's what's happening today
+          </Typography>
+
+          {/* Metric Cards */}
+          <Grid container spacing={4} justifyContent="center" alignItems="center">
+            {/* Total Items Sold */}
+            <Grid item xs={12} sm={6} md={4}>
+              <MetricCard
+                title="Total Items Sold"
+                value={totalSold}
+                change="0%"
+              />
             </Grid>
-            <Grid item xs={6}>
-              <MetricCard title="Total Items Sold" value={totalSold} change="0%" />
-            </Grid>
-            <Grid item xs={6}>
+
+            {/* Low Stock Alerts */}
+            <Grid item xs={12} sm={6} md={4}>
               <MetricCard
                 title="Low Stock Alerts"
                 value={lowStockAlerts.length}
@@ -53,6 +84,33 @@ const AdminDashboard = ({ user, onLogout }) => {
               />
             </Grid>
           </Grid>
+
+          {/* Action Buttons */}
+          <Box
+            sx={{
+              mt: 4,
+              display: "flex",
+              gap: 2,
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate("/admin/add-item")}
+              sx={{ textTransform: "none", fontWeight: "bold" }}
+            >
+              Add Item
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate("/admin/view-item")}
+              sx={{ textTransform: "none", fontWeight: "bold" }}
+            >
+              View Item
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Box>

@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography, Paper } from "@mui/material";
 import { sellItem } from "../../api";
+import { useNavigate } from "react-router-dom";
+
 
 const SellItem = () => {
   const [formData, setFormData] = useState({ item_name: "", quantity_to_sell: 0 });
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); // To navigate back to the stock list or dashboard
+
+  const handleBack = () => {
+    navigate(-1); // Go back to the previous page
+    };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,6 +56,14 @@ const SellItem = () => {
           Sell Item
         </Button>
       </Box>
+       <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleBack}
+            sx={{ mt: 2 }}
+          >
+          Back
+        </Button>
     </Paper>
   );
 };

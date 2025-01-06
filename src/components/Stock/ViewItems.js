@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Paper, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Typography,Button, Paper, Table, TableBody, TableCell, TableHead, TableRow,Box, } from "@mui/material";
 import { getAllItems } from "../../api";
+import { useNavigate } from "react-router-dom";
+
 
 const ViewStock = () => {
   const [items, setItems] = useState([]);
+  const navigate = useNavigate(); // To navigate back to the stock list or dashboard
+
+const handleBack = () => {
+  navigate(-1); // Go back to the previous page
+  };
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -18,7 +25,8 @@ const ViewStock = () => {
   }, []);
 
   return (
-    <Paper sx={{ padding: 4, margin: "20px" }}>
+    <Box sx={{ paddingTop: "32px" }}> {/* Add padding to create space */}
+      <Paper sx={{ padding: 4, margin: "50px auto", maxWidth: 800 }}> {/* Add more margin */}
       <Typography variant="h5" gutterBottom>
         Stock Items
       </Typography>
@@ -38,7 +46,16 @@ const ViewStock = () => {
           ))}
         </TableBody>
       </Table>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={handleBack}
+          sx={{ mt: 2 }}
+        >
+          Back
+        </Button>
     </Paper>
+    </Box>
   );
 };
 

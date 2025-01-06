@@ -6,7 +6,7 @@ import { login } from "../../api";
 const LoginPage = ({ setUser }) => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // For loader
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,27 +15,43 @@ const LoginPage = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Reset error
-    setLoading(true); // Show loader
+    setLoading(true); // Show loading state
+    setError(""); // Clear previous errors
+    
     try {
       const response = await login(formData.username, formData.password);
-
-      console.log("Login Response:", response); // Debugging
-
-      if (!setUser || typeof setUser !== "function") {
-        throw new Error("setUser is not a valid function.");
+      
+      // First check if response exists
+      if (!response) {
+        throw new Error("No response from server");
       }
-
-      setUser(response);
-      navigate(response.role === "admin" ? "/admin" : "/officer");
+  
+      // Handle error response
+      if (response.status === "error") {
+        setError(response.message || "Invalid credentials");
+        return; // Stop execution here
+      }
+  
+      // Only proceed if status is explicitly "success"
+      if (response.status === "success") {
+        setUser({
+          role: response.role,
+          name: response.username,
+        });
+        navigate(response.role === "admin" ? "/admin" : "/officer");
+      } else {
+        // Handle unexpected status
+        setError("Unexpected response from server");
+      }
+  
     } catch (error) {
-      console.error("Login Error:", error);
-      setError(error.response?.data?.message || "Invalid username or password.");
+      console.error("Login error:", error);
+      setError("An error occurred. Please try again.");
     } finally {
-      setLoading(false); // Hide loader
+      setLoading(false); // Hide loading state
     }
   };
-
+  
   return (
     <Box
       sx={{
@@ -51,9 +67,9 @@ const LoginPage = ({ setUser }) => {
           Login
         </Typography>
         {error && (
-          <Typography color="error" align="center" sx={{ mb: 2 }}>
-            {error}
-          </Typography>
+        <Typography color="error" align="center" sx={{ mb: 2 }}>
+          {error}
+        </Typography>
         )}
         <Box component="form" onSubmit={handleSubmit}>
           <TextField

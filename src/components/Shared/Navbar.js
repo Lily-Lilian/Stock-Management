@@ -36,13 +36,13 @@ const Navbar = ({ user, notifications, onLogout }) => {
         boxShadow: "none",
         top: 0,
         zIndex: 1201,
-        padding: "0 16px",
+        padding: "0 20px",
       }}
     >
       <Toolbar>
         {/* Left: Hey User */}
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          Hey {user?.name || "User"}
+          Hey {user?.username || "User"}
         </Typography>
 
         {/* Right: Notifications and User Avatar */}
