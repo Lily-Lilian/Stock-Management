@@ -1,0 +1,10 @@
+*.dcu 
+*.exe 
+*.local 
+*.identcache 
+*.drc 
+*.map 
+*.stat 
+__history/ 
+Win32/ 
+Win64/ 
