@@ -84,7 +84,7 @@ const Navbar = ({ user, notifications, onLogout }) => {
               src={user?.avatar || "https://via.placeholder.com/40"}
               sx={{ width: 32, height: 32 }}
             />
-            <Typography sx={{ ml: 1, color: "#fff" }}>{user?.name || "User"}</Typography>
+            <Typography sx={{ ml: 1, color: "#fff" }}>{user?.username || "User"}</Typography>
           </Box>
         </Box>
       </Toolbar>

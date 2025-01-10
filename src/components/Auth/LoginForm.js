@@ -36,7 +36,7 @@ const LoginPage = ({ setUser }) => {
       if (response.status === "success") {
         setUser({
           role: response.role,
-          name: response.username,
+          username: response.username,
         });
         navigate(response.role === "admin" ? "/admin" : "/officer");
       } else {

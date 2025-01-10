@@ -28,16 +28,16 @@ export const signup = (username, password, role) =>
 
 // Stock Management
 export const addItem = (name, quantity) =>
-  handleRequest(() => apiClient.post("/addItem", { name, quantity }));
+  handleRequest(() => apiClient.post("/addItems", { name, quantity }));
 
-export const sellItem = (name, quantity) =>
-  handleRequest(() => apiClient.post("/sellItem", { name, quantity }));
+export const sellItem = (name, quantityToSell) =>
+  handleRequest(() => apiClient.post("/sellItem", { name, quantityToSell }));
 
 export const getAllItems = () =>
   handleRequest(() => apiClient.get("/items"));
 
 export const getTotalItemsSold = async () => {
-    const response = await axios.get("/api/total-sold");
+    const response = await axios.get("/api/soldItems");
     return response.data.total_sold;
   };
   

@@ -6,7 +6,7 @@ import MetricCard from "../Shared/Card";
 import { useNavigate } from "react-router-dom";
 import { getTotalItemsSold, getLowStockAlerts } from "../../api";
 
-const AdminDashboard = ({ user, onLogout }) => {
+const OfficerDashboard = ({ user, onLogout }) => {
   const [totalSold, setTotalSold] = useState(0);
   const [lowStockAlerts, setLowStockAlerts] = useState([]);
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const AdminDashboard = ({ user, onLogout }) => {
               textAlign: "center",
             }}
           >
-            Hey {user?.name || "User"} - here's what's happening today
+            Hey {user?.username || "User"} - here's what's happening today
           </Typography>
 
           {/* Metric Cards */}
@@ -117,4 +117,4 @@ const AdminDashboard = ({ user, onLogout }) => {
   );
 };
 
-export default AdminDashboard;
+export default OfficerDashboard;

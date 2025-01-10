@@ -65,7 +65,7 @@ const SignupPage = () => {
             value={formData.role}
             onChange={handleChange}
             margin="normal"
-            helperText="Choose 'admin' or 'stock_officer'"
+            helperText="Choose 'admin' or 'Stock-officer'"
           />
           <Button fullWidth type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
             Sign Up

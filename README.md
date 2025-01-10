@@ -81,18 +81,18 @@ src/
 
 2. **Install dependencies**
    ```bash
-   npm install
+npm install
    ```
 
 3. **Configure environment**
    Create `.env` file:
    ```env
-   REACT_APP_API_BASE_URL=http://localhost:5500/api
+REACT_APP_API_BASE_URL=http://localhost:8080
    ```
 
 4. **Launch application**
    ```bash
-   npm start
+npm start
    ```
 
    Access at: `http://localhost:3000`

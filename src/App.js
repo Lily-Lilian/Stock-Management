@@ -31,9 +31,10 @@ const App = () => {
   const handleLogin = (userData) => {
     setUser({
       ...userData,
-      name: userData.username || "User",
+      name: userData.username, 
     });
   };
+  
 
   const handleLogout = () => {
     setUser(null); // Clear user state on logout
